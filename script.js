@@ -25,14 +25,23 @@ for( i = 0; i < numeroCartas; i++ ){
     cartaVirada = arrayCartas[i];
     const divContainer = document.querySelector('.container')
     divContainer.innerHTML += 
-    `<div class="carta">
-        <div class="normal">
+    `<div class="carta" onclick="virarCarta(this)">
+        <div class="face frente">
             <img src="images/back.png">
         </div>
-        <div class="virada">
+        <div class="face outrolado">
             <img src="images/${cartaVirada}.gif">
         </div>
     </div>`
+}
+
+
+function virarCarta(essaCarta) {
+    let frenteVirado = essaCarta.querySelector('.frente')
+    let outroladoVirado = essaCarta.querySelector('.outrolado')
+
+    frenteVirado.classList.add('frente-virado')
+    outroladoVirado.classList.add('outrolado-virado')
 }
 
 
