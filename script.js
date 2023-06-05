@@ -63,7 +63,7 @@ function virarCarta(essaCarta) {
     } else {
         
         container.classList.add('nao-clica')
-        setTimeout (simclica, 1500)
+        setTimeout (simclica, 1000)
 
         segundaCarta = outroladoVirado.innerHTML;
 
@@ -72,7 +72,7 @@ function virarCarta(essaCarta) {
 
         if ( primeiraCarta !== segundaCarta ){
             setTimeout (desvirar, 1000)
-            setTimeout (zerarAtributos, 1200)
+            setTimeout (zerarAtributos, 1000)
         } else {
             setTimeout (zerarAtributos, 1000)
             verificaVitoria()
