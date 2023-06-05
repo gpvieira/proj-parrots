@@ -125,7 +125,7 @@ function verificaVitoria() {
         alert(`Você ganhou em ${contadorGeral} jogadas! A duração do jogo foi de ${tempo} segundos!`)
         
         while(resposta !== 'sim' && resposta !== 'não'){
-        resposta = prompt('Você gostaria de reiniciar a partida? (sim ou não')
+        resposta = prompt('Você gostaria de reiniciar a partida? (sim ou não)')
         }
 
         if(resposta === 'sim'){
