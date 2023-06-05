@@ -11,7 +11,10 @@ let contadorJogada = 0;
 let primeiraCarta = '';
 let segundaCarta = '';
 let contadorGeral = 0;
-let container = document.querySelector('.container')
+let container = document.querySelector('.container');
+let tempo = 0;
+let idRelogio = '';
+let resposta = '';
 
 
 while(numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 !== 0){
@@ -39,6 +42,8 @@ for( i = 0; i < numeroCartas; i++ ){
         </div>
     </div>`
 }
+
+relogio()
 
 function virarCarta(essaCarta) {
     let frenteVirado = essaCarta.querySelector('.frente')
@@ -117,10 +122,30 @@ function zerarAtributos() {
 function verificaVitoria() {
     let temDesvirada = document.querySelector('.desvirada')
     if (temDesvirada === null) {
-        alert(`Você ganhou em ${contadorGeral} jogadas!`)
+        alert(`Você ganhou em ${contadorGeral} jogadas! A duração do jogo foi de ${tempo} segundos!`)
+        
+        while(resposta !== 'sim' && resposta !== 'não'){
+        resposta = prompt('Gostaria de reiniciar a partida?')
+        }
+
+        if(resposta === 'sim'){
+            location.reload()
+        }else{
+            clearInterval(idRelogio)
+        }
     }
 }
 
 function simclica() {    
     container.classList.remove('nao-clica')
+}
+
+function passarTempo() {
+    tempo++
+    const divContador = document.querySelector('.contador')
+    divContador.innerHTML = tempo    
+}
+
+function relogio() {
+    idRelogio = setInterval(passarTempo, 1000)
 }

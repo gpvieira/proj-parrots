@@ -76,6 +76,19 @@ img {
     height: 100px;    
 }
 
+.contador {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: -0.004em;
+    color: #86BD8D;
+    position: fixed;
+    top: 16px;
+    right: 18px;
+}
+
 @media (max-width:614px) {
     .container {
         flex-direction:column;
