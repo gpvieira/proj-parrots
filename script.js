@@ -6,7 +6,11 @@ let numeroCartas = 0;
 let numeroDuplas = 0;
 let arrayImagens = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot']
 let arrayCartas = [];
-let cartaVirada = ''
+let cartaVirada = '';
+let contadorJogada = 0;
+let primeiraCarta = '';
+let segundaCarta = '';
+let contadorGeral = 0;
 
 while(numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 !== 0){
     numeroCartas = prompt("Com quantas cartas quer jogar?");
@@ -20,21 +24,19 @@ for( i = 0; i < numeroDuplas; i++ ) {
 
 arrayCartas.sort(comparador)
 
-
 for( i = 0; i < numeroCartas; i++ ){    
     cartaVirada = arrayCartas[i];
     const divContainer = document.querySelector('.container')
     divContainer.innerHTML += 
-    `<div class="carta" onclick="virarCarta(this)">
+    `<div class="carta desvirada" onclick="virarCarta(this)" data-test="card">
         <div class="face frente">
-            <img src="images/back.png">
+            <img src="images/back.png" data-test="face-down-image">
         </div>
         <div class="face outrolado">
-            <img src="images/${cartaVirada}.gif">
+            <img src="images/${cartaVirada}.gif" data-test="face-up-image">
         </div>
     </div>`
 }
-
 
 function virarCarta(essaCarta) {
     let frenteVirado = essaCarta.querySelector('.frente')
@@ -42,6 +44,75 @@ function virarCarta(essaCarta) {
 
     frenteVirado.classList.add('frente-virado')
     outroladoVirado.classList.add('outrolado-virado')
+    essaCarta.removeAttribute('onclick')
+    essaCarta.classList.remove('desvirada')
+    contadorGeral++
+
+    if (contadorJogada === 0){
+        
+        contadorJogada++;
+
+        primeiraCarta = outroladoVirado.innerHTML;
+
+        essaCarta.classList.add('para-desvirar')
+        
+        
+
+    } else {
+
+        segundaCarta = outroladoVirado.innerHTML;
+
+        essaCarta.classList.add('para-desvirar2')
+        
+
+        if ( primeiraCarta !== segundaCarta ){
+            setTimeout (desvirar, 1000)
+            setTimeout (zerarAtributos, 1200)
+        } else {
+            setTimeout (zerarAtributos, 1000)
+            verificaVitoria()
+        }        
+
+    }
+
 }
 
+function desvirar() {
+
+    let desviro = document.querySelector('.para-desvirar .frente')
+    let desviro2 = document.querySelector('.para-desvirar .outrolado')
+    let desviro3 = document.querySelector('.para-desvirar2 .frente')
+    let desviro4 = document.querySelector('.para-desvirar2 .outrolado')
+
+    desviro.classList.remove('frente-virado')
+    desviro2.classList.remove('outrolado-virado')
+    desviro3.classList.remove('frente-virado')
+    desviro4.classList.remove('outrolado-virado')
+
+    let clicavel = document.querySelector('.para-desvirar')
+    let clicavel2 = document.querySelector('.para-desvirar2')
+    clicavel.setAttribute("onclick", "virarCarta(this)")
+    clicavel2.setAttribute("onclick", "virarCarta(this)")
+    clicavel.classList.add('desvirada')
+    clicavel2.classList.add('desvirada')
+
+}
+
+function zerarAtributos() {
+    primeiraCarta = '';
+    segundaCarta = '';
+    contadorJogada = 0;
+    let cartaPassada = document.querySelector('.para-desvirar')
+    cartaPassada.classList.remove('para-desvirar')
+    let cartaPassada2 = document.querySelector('.para-desvirar2')
+    cartaPassada2.classList.remove('para-desvirar2')
+    
+}
+
+function verificaVitoria() {
+    let temDesvirada = document.querySelector('.desvirada')
+    if (temDesvirada === null) {
+        alert(`Você ganhou em ${contadorGeral} jogadas!`)
+    }
+}
 
