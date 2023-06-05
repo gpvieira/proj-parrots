@@ -11,6 +11,8 @@ let contadorJogada = 0;
 let primeiraCarta = '';
 let segundaCarta = '';
 let contadorGeral = 0;
+let container = document.querySelector('.container')
+
 
 while(numeroCartas < 4 || numeroCartas > 14 || numeroCartas % 2 !== 0){
     numeroCartas = prompt("Com quantas cartas quer jogar?");
@@ -30,7 +32,7 @@ for( i = 0; i < numeroCartas; i++ ){
     divContainer.innerHTML += 
     `<div class="carta desvirada" onclick="virarCarta(this)" data-test="card">
         <div class="face frente">
-            <img src="images/back.png" data-test="face-down-image">
+            <img class="papagaio" src="images/back.png" data-test="face-down-image">
         </div>
         <div class="face outrolado">
             <img src="images/${cartaVirada}.gif" data-test="face-up-image">
@@ -59,6 +61,9 @@ function virarCarta(essaCarta) {
         
 
     } else {
+        
+        container.classList.add('nao-clica')
+        setTimeout (simclica, 1500)
 
         segundaCarta = outroladoVirado.innerHTML;
 
@@ -116,3 +121,6 @@ function verificaVitoria() {
     }
 }
 
+function simclica() {    
+    container.classList.remove('nao-clica')
+}
