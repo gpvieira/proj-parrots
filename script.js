@@ -75,7 +75,7 @@ function virarCarta(essaCarta) {
             setTimeout (zerarAtributos, 1000)
         } else {
             setTimeout (zerarAtributos, 1000)
-            verificaVitoria()
+            setTimeout (verificaVitoria, 1000)
         }        
 
     }
